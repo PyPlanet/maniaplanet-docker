@@ -1,0 +1,2 @@
+# Dockerized Maniaplanet Dedicated
+
