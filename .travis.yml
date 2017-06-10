@@ -8,6 +8,7 @@ env:
 
 before_install:
  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+ - cp dedicated_vars.default.env dedicated_vars.env
  - chmod +x docker-compose
  - sudo mv docker-compose /usr/local/bin
 
