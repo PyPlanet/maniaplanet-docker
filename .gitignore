@@ -11,4 +11,6 @@
 
 
 ### Docker
-
+/UserData
+/Logs
+dedicated_vars.env

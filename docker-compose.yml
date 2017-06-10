@@ -1,0 +1,24 @@
+# Sample file for using docker-compose with the ManiaPlanet Dockerfile.
+version: '3'
+services:
+  dedicated:
+    image: dedicated
+    build: .
+    restart: always
+    env_file: ./dedicated_vars.env
+    volumes:
+      - ./UserData:/dedicated/UserData
+      # - ./GameData:/dedicated/GameData
+      - ./Logs:/dedicated/Logs
+    expose:
+      - "2350"
+      - "2350/udp"
+      - "3450"
+      - "3450/udp"
+      - "5000"
+    ports:
+      - 5000:5000
+      - 2350:2350
+      - "2350/udp"
+      - "3450"
+      - "3450/udp"
