@@ -1,7 +1,7 @@
-FROM alpine:3.5
+FROM alpine:3.7
 MAINTAINER Tom Valk <tomvalk@lt-box.info>
 
-ENV DEDICATED_URL http://files.v04.maniaplanet.com/server/ManiaplanetServer_2017-05-31.zip
+ENV DEDICATED_URL http://files.v04.maniaplanet.com/server/ManiaplanetServer_2017-11-17.zip
 ENV PROJECT_DIR /dedicated
 WORKDIR /dedicated
 
