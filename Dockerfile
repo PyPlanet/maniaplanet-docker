@@ -3,6 +3,7 @@ MAINTAINER Tom Valk <tomvalk@lt-box.info>
 
 ENV DEDICATED_URL http://files.v04.maniaplanet.com/server/ManiaplanetServer_2017-11-17.zip
 ENV PROJECT_DIR /dedicated
+ENV TEMPLATE_DIR /dedicated-configs
 WORKDIR /dedicated
 
 # Install several dependencies.
@@ -19,6 +20,7 @@ RUN wget $DEDICATED_URL -qO /tmp/dedicated.zip
 
 # Create folder and unpack, cleanup, prepare executables etc.
 RUN mkdir -p $PROJECT_DIR \
+    && mkdir -p $TEMPLATE_DIR \
     && unzip -quo /tmp/dedicated.zip -d $PROJECT_DIR \
     && rm /tmp/dedicated.zip \
     && rm -rf $PROJECT_DIR/*.bat $PROJECT_DIR/*.exe $PROJECT_DIR/*.html $PROJECT_DIR/RemoteControlExamples \
@@ -31,9 +33,9 @@ RUN mkdir -p $PROJECT_DIR \
     && mkdir -p $PROJECT_DIR/UserData/Maps/MatchSettings
 
 # Install the dedicated configuration file(s).
-ADD config.default.xml $PROJECT_DIR/config.txt
-ADD matchsettings.default.xml $PROJECT_DIR/matchsettings.txt
-ADD stadium_map.Map.gbx $PROJECT_DIR/stadium_map.Map.gbx
+ADD config.default.xml $TEMPLATE_DIR/config.txt
+ADD matchsettings.default.xml $TEMPLATE_DIR/matchsettings.txt
+ADD stadium_map.Map.gbx $TEMPLATE_DIR/stadium_map.Map.gbx
 
 # Install run script.
 ADD entrypoint.sh $PROJECT_DIR/start.sh

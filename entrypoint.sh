@@ -20,14 +20,17 @@ echo "=> Going to run on forced IP: ${FORCE_IP_ADDRESS} and port: ${FORCE_IP_POR
 : ${SERVER_NAME:="My Docker Server"}
 
 # Copy the configuration files if not yet copied.
-if [ ! -f ./UserData/Config/config.txt ]; then
-    cp config.txt UserData/Config/config.txt
+mkdir -p /dedicated/UserData/Config
+mkdir -p /dedicated/UserData/Packs
+mkdir -p /dedicated/UserData/Maps/MatchSettings
+if [ ! -f /dedicated/UserData/Config/config.txt ]; then
+    cp /dedicated-configs/config.txt /dedicated/UserData/Config/config.txt
 fi
-if [ ! -f ./UserData/Maps/MatchSettings/default.txt ]; then
-    cp matchsettings.txt UserData/Maps/MatchSettings/default.txt
+if [ ! -f /dedicated/UserData/Maps/MatchSettings/default.txt ]; then
+    cp /dedicated-configs/matchsettings.txt /dedicated/UserData/Maps/MatchSettings/default.txt
 fi
-if [ ! -f ./UserData/Maps/stadium_map.Map.gbx ]; then
-    cp stadium_map.Map.gbx UserData/Maps/stadium_map.Map.gbx
+if [ ! -f /dedicated/UserData/Maps/stadium_map.Map.gbx ]; then
+    cp /dedicated-configs/stadium_map.Map.gbx /dedicated/UserData/Maps/stadium_map.Map.gbx
 fi
 
 # Download title.
