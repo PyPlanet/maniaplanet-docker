@@ -3,7 +3,7 @@
 # We are required to get the public ip if we don't have it in our env currently.
 if [ "$FORCE_IP_ADDRESS" = "" ]
 then
-   FORCE_IP_ADDRESS=`wget -qO- http://ifconfig.io/ip`
+   FORCE_IP_ADDRESS=`wget -4 -qO- http://ifconfig.co`
 fi
 if [ "$FORCE_IP_PORT" = "" ]
 then
