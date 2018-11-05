@@ -11,7 +11,7 @@ RUN apk update \
 && apk add --no-cache unzip wget ca-certificates
 
 # Link the musl to glibc as it's compatible (required in Alpine image).
-RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub \
+RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
 && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.25-r0/glibc-2.25-r0.apk \
 && apk add glibc-2.25-r0.apk
 
