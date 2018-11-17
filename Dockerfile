@@ -1,7 +1,7 @@
 FROM alpine:3.7
 MAINTAINER Tom Valk <tomvalk@lt-box.info>
 
-ENV DEDICATED_URL http://files.v04.maniaplanet.com/server/ManiaplanetServer_2018-07-03.zip
+ENV DEDICATED_URL http://files.v04.maniaplanet.com/server/ManiaplanetServer_2018-11-15.zip
 ENV PROJECT_DIR /dedicated
 ENV TEMPLATE_DIR /dedicated-configs
 WORKDIR /dedicated
@@ -13,7 +13,9 @@ RUN apk update \
 # Link the musl to glibc as it's compatible (required in Alpine image).
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
 && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.25-r0/glibc-2.25-r0.apk \
-&& apk add glibc-2.25-r0.apk
+&& apk add glibc-2.25-r0.apk libstdc++ musl libuuid
+
+ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/:/lib/"
 
 # Download dedicated + titles.
 RUN wget $DEDICATED_URL -qO /tmp/dedicated.zip
