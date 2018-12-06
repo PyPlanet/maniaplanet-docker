@@ -13,7 +13,7 @@ RUN apk update \
 # Link the musl to glibc as it's compatible (required in Alpine image).
 RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
 && wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.25-r0/glibc-2.25-r0.apk \
-&& apk add glibc-2.25-r0.apk libstdc++ musl libuuid
+&& apk add glibc-2.25-r0.apk libstdc++ musl libuuid dos2unix
 
 ENV LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib/:/lib/"
 
@@ -41,7 +41,7 @@ ADD stadium_map.Map.gbx $TEMPLATE_DIR/stadium_map.Map.gbx
 
 # Install run script.
 ADD entrypoint.sh $PROJECT_DIR/start.sh
-RUN chmod +x $PROJECT_DIR/start.sh
+RUN dos2unix $PROJECT_DIR/start.sh && chmod +x $PROJECT_DIR/start.sh
 
 # Expose + vols.
 VOLUME $PROJECT_DIR/UserData $PROJECT_DIR/Logs
