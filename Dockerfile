@@ -1,5 +1,5 @@
 FROM alpine:3.7
-MAINTAINER Tom Valk <tomvalk@lt-box.info>
+LABEL maintainer="Tom Valk <tomvalk@lt-box.info>"
 
 ENV DEDICATED_URL http://files.v04.maniaplanet.com/server/ManiaplanetServer_2019-10-23.zip
 ENV PROJECT_DIR /dedicated
