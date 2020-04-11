@@ -1,14 +1,17 @@
 #!/bin/sh
 
 # We are required to get the public ip if we don't have it in our env currently.
+
 if [ "$FORCE_IP_ADDRESS" = "" ]
 then
    FORCE_IP_ADDRESS=`wget -4 -qO- http://ifconfig.co`
 fi
+
 if [ "$FORCE_IP_PORT" = "" ]
 then
    FORCE_IP_PORT=${PORT-2350}
 fi
+
 echo "=> Going to run on forced IP: ${FORCE_IP_ADDRESS} and port: ${FORCE_IP_PORT}"
 
 # Make sure we use defaults everywhere.
@@ -20,17 +23,19 @@ echo "=> Going to run on forced IP: ${FORCE_IP_ADDRESS} and port: ${FORCE_IP_POR
 : ${SERVER_NAME:="My Docker Server"}
 
 # Copy the configuration files if not yet copied.
-mkdir -p /dedicated/UserData/Config
-mkdir -p /dedicated/UserData/Packs
-mkdir -p /dedicated/UserData/Maps/MatchSettings
-if [ ! -f /dedicated/UserData/Config/config.txt ]; then
-    cp /dedicated-configs/config.txt /dedicated/UserData/Config/config.txt
+mkdir -p ${PROJECT_ROOT}/UserData/Config
+mkdir -p ${PROJECT_ROOT}/UserData/Packs
+mkdir -p ${PROJECT_ROOT}/UserData/Maps/MatchSettings
+if [ ! -f ${PROJECT_ROOT}/UserData/Config/config.txt ]; then
+    cp ${TEMPLATE_DIR}/config.txt ${PROJECT_ROOT}/UserData/Config/config.txt
 fi
-if [ ! -f /dedicated/UserData/Maps/MatchSettings/default.txt ]; then
-    cp /dedicated-configs/matchsettings.txt /dedicated/UserData/Maps/MatchSettings/default.txt
+
+if [ ! -f ${PROJECT_ROOT}/UserData/Maps/MatchSettings/default.txt ]; then
+    cp ${TEMPLATE_DIR}/matchsettings.txt ${PROJECT_ROOT}/UserData/Maps/MatchSettings/default.txt
 fi
-if [ ! -f /dedicated/UserData/Maps/stadium_map.Map.gbx ]; then
-    cp /dedicated-configs/stadium_map.Map.gbx /dedicated/UserData/Maps/stadium_map.Map.gbx
+
+if [ ! -f ${PROJECT_ROOT}/UserData/Maps/stadium_map.Map.gbx ]; then
+    cp ${TEMPLATE_DIR}/stadium_map.Map.gbx ${PROJECT_ROOT}/UserData/Maps/stadium_map.Map.gbx
 fi
 
 # Download title.
@@ -38,9 +43,9 @@ fi
 echo "=> Downloading newest title version"
 if [ "$TITLE_PACK_FILE" = "" ]
 then
-    wget ${TITLE_PACK_URL} -qP ./UserData/Packs/
+    wget ${TITLE_PACK_URL} -qP ${PROJECT_ROOT}/UserData/Packs/
 else
-    wget ${TITLE_PACK_URL} -qO ./UserData/Packs/${TITLE_PACK_FILE}
+    wget ${TITLE_PACK_URL} -qO ${PROJECT_ROOT}/UserData/Packs/${TITLE_PACK_FILE}
 fi
 
 # Start dedicated.
