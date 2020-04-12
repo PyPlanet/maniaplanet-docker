@@ -1,6 +1,6 @@
-FROM alpine:latest
+FROM alpine:3.11.5
 LABEL maintainer="Tom Valk <tomvalk@lt-box.info>"
-ENV DEDICATED_URL http://files.v04.maniaplanet.com/server/ManiaplanetServer_Latest.zip
+ENV DEDICATED_URL http://files.v04.maniaplanet.com/server/ManiaplanetServer_2019-10-23.zip
 ENV PROJECT_ROOT /app/dedicated
 ENV TEMPLATE_DIR /app/dedicated-configs
 
@@ -47,7 +47,7 @@ RUN chown -R maniaplanet:maniaplanet $TEMPLATE_DIR
 
 USER maniaplanet
 
-#Expose ports
+# Expose ports.
 EXPOSE 2350 2350/udp 3450 3450/udp 5000
 
 CMD [ "./start.sh" ]
